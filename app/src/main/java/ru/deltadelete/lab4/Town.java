@@ -21,7 +21,7 @@ public class Town {
     public static Town fromFaker(Faker faker) {
         return new Town(
                 faker.address().city(),
-                faker.country().name(),
+                faker.address().country(),
                 String.format("https://flagcdn.com/w320/%s.png", faker.country().countryCode2())
         );
     }

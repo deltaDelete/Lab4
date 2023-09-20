@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
@@ -13,26 +14,32 @@
         android:elevation="16dp"
         app:cardCornerRadius="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:padding="16dp"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/countryFlag"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/townName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="string/town"
+                    android:maxLength="30"
+                    android:singleLine="false"
+                    android:text="@string/town"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -40,7 +47,8 @@
                     android:id="@+id/townCountry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="string/country"
+                    android:singleLine="false"
+                    android:text="@string/country"
                     android:textSize="18sp" />
 
             </LinearLayout>
@@ -48,16 +56,17 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/countryFlag"
                 android:layout_width="58dp"
+                android:layout_weight="0"
                 android:layout_height="29dp"
                 android:scaleType="centerCrop"
-                app:viewAspectRatio="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderImage="@drawable/ic_launcher_foreground"
-                app:placeholderImageScaleType="centerCrop" />
+                app:placeholderImageScaleType="centerCrop"
+                app:viewAspectRatio="2" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
