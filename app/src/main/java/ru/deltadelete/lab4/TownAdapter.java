@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -30,6 +31,11 @@ public class TownAdapter extends ArrayAdapter<Town> {
     @LayoutRes
     private int layout;
     private List<Town> items;
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onClick(View view, Town item, int position);
+    }
 
     public TownAdapter(Context context, List<Town> items) {
         super(context, R.layout.town_item, items);
@@ -37,6 +43,10 @@ public class TownAdapter extends ArrayAdapter<Town> {
         this.items = items;
         this.layout = R.layout.town_item;
         this.inflater = LayoutInflater.from(context);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
     @NonNull
@@ -51,12 +61,17 @@ public class TownAdapter extends ArrayAdapter<Town> {
         TextView townName = view.findViewById(R.id.townName);
         TextView townCountry = view.findViewById(R.id.townCountry);
         SimpleDraweeView flag = view.findViewById(R.id.countryFlag);
+        CardView card = view.findViewById(R.id.card);
 
         var town = items.get(position);
 
         townName.setText(town.getName());
         townCountry.setText(town.getCountry());
         flag.setImageURI(town.getFlagUrl());
+        card.setOnClickListener((v) -> {
+            onItemClickListener.onClick(view, town, position);
+        });
+
 
         return view;
     }

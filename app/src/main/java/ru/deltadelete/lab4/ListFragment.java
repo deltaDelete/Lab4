@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.javafaker.Faker;
 
@@ -17,28 +18,19 @@ import java.util.Locale;
 
 import ru.deltadelete.lab4.databinding.FragmentListBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ListFragment extends Fragment {
 
-    private FragmentListBinding binding;
 
     public ListFragment() {
         // Required empty public constructor
-    }
-
-    @NonNull
-    public static ListFragment newInstance() {
-        return new ListFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    private FragmentListBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -60,6 +52,9 @@ public class ListFragment extends Fragment {
             towns.add(Town.fromFaker(faker));
         }
         var adapter = new TownAdapter(getContext(), towns);
+        adapter.setOnItemClickListener((view1, item, position) -> {
+            Toast.makeText(getContext(), item.getName(), Toast.LENGTH_SHORT).show();
+        });
 
         binding.listViewFl.setAdapter(adapter);
     }

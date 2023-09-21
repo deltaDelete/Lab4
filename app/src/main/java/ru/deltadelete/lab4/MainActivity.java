@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(root);
         setSupportActionBar(binding.toolbarMain);
 
-        if (savedInstanceState == null) {
+//        if (savedInstanceState == null) {
 //            getSupportFragmentManager()
 //                    .beginTransaction()
 //                    .add(R.id.fragment_view_main, ListFragment.newInstance())
 //                    // .addToBackStack("list_fragment_transaction") // Зачем возвращаться на пустое?
 //                    .commit();
-        }
+//        }
     }
 }

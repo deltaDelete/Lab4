@@ -8,6 +8,7 @@
     <ListView
         android:id="@+id/list_view_fl"
         tools:listitem="@layout/town_item"
+        android:listSelector="@color/transparent"
         android:dividerHeight="0dp"
         android:divider="@color/transparent"
         android:layout_width="match_parent"
