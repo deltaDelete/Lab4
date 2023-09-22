@@ -1,4 +1,4 @@
-package ru.deltadelete.lab4;
+package ru.deltadelete.lab5;
 
 import org.junit.Test;
 

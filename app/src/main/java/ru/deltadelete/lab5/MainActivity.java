@@ -1,4 +1,4 @@
-package ru.deltadelete.lab4;
+package ru.deltadelete.lab5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.color.DynamicColors;
 
-import ru.deltadelete.lab4.databinding.ActivityMainBinding;
+import ru.deltadelete.lab5.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 

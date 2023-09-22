@@ -1,26 +1,20 @@
-package ru.deltadelete.lab4;
+package ru.deltadelete.lab5;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
 
-import ru.deltadelete.lab4.R;
-import ru.deltadelete.lab4.Town;
+import ru.deltadelete.lab5.R;
 
 import java.util.List;
 
@@ -33,8 +27,14 @@ public class TownAdapter extends ArrayAdapter<Town> {
     private List<Town> items;
     private OnItemClickListener onItemClickListener;
 
+    private OnLongClickListener onLongItemClickListener;
+
     public interface OnItemClickListener {
         void onClick(View view, Town item, int position);
+    }
+
+    public interface OnLongClickListener {
+        boolean onLongClick(View view, Town item, int position);
     }
 
     public TownAdapter(Context context, List<Town> items) {
@@ -47,6 +47,10 @@ public class TownAdapter extends ArrayAdapter<Town> {
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
+    }
+
+    public void setOnLongItemClickListener(OnLongClickListener listener) {
+        this.onLongItemClickListener = listener;
     }
 
     @NonNull
@@ -71,8 +75,14 @@ public class TownAdapter extends ArrayAdapter<Town> {
         card.setOnClickListener((v) -> {
             onItemClickListener.onClick(view, town, position);
         });
-
+        card.setOnLongClickListener(v -> onLongItemClickListener.onLongClick(view, town, position));
 
         return view;
+    }
+
+    @Override
+    public synchronized void remove(@Nullable Town object) {
+        items.remove(object);
+        super.remove(object);
     }
 }

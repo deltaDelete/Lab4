@@ -1,5 +1,6 @@
-package ru.deltadelete.lab4;
+package ru.deltadelete.lab5;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import com.github.javafaker.Faker;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import ru.deltadelete.lab4.databinding.FragmentListBinding;
+import ru.deltadelete.lab5.databinding.FragmentListBinding;
 
 public class ListFragment extends Fragment {
 
@@ -46,6 +47,24 @@ public class ListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // TODO: не обновлять при возвращении с другого фрагмента
+        initList();
+        initButtonAdd();
+    }
+
+    private void initButtonAdd() {
+        binding.buttonAdd.setOnClickListener(v -> {
+            Activity activity = getActivity();
+            if (activity == null) return;
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_view_main, new NewTownFragment(), "fragment_new_town")
+                    .addToBackStack("fragment_new_town")
+                    .commit();
+        });
+    }
+
+    private void initList() {
         var towns = new ArrayList<Town>();
         var faker = new Faker(getCurrentLocale());
         for (int i = 0; i < 50; i++) {
@@ -54,6 +73,17 @@ public class ListFragment extends Fragment {
         var adapter = new TownAdapter(getContext(), towns);
         adapter.setOnItemClickListener((view1, item, position) -> {
             Toast.makeText(getContext(), item.getName(), Toast.LENGTH_SHORT).show();
+        });
+        adapter.setOnLongItemClickListener((view1, item, position) -> {
+            view1.animate()
+                    .translationXBy(view1.getWidth())
+                    .setDuration(250)
+                    .withEndAction(() -> {
+                        adapter.remove(item);
+                        view1.animate().translationXBy(view1.getWidth()).setDuration(0).start();
+                    })
+                    .start();
+            return true;
         });
 
         binding.listViewFl.setAdapter(adapter);
