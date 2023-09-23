@@ -5,6 +5,11 @@ import androidx.annotation.DrawableRes;
 import com.github.javafaker.Faker;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import ru.deltadelete.lab5.helpers.LocaleHelper;
 
 public class Town implements Serializable {
     private int id;
@@ -21,10 +26,12 @@ public class Town implements Serializable {
     }
 
     public static Town fromFaker(Faker faker) {
+        var i = faker.random().nextInt(LocaleHelper.getLocales().size());
+        Locale locale = LocaleHelper.getLocales().get(i);
         return new Town(
                 faker.address().city(),
-                faker.address().country(),
-                String.format("https://flagcdn.com/w320/%s.png", faker.country().countryCode2())
+                locale.getDisplayCountry(),
+                String.format("https://flagcdn.com/w320/%s.png", locale.getCountry().toLowerCase())
         );
     }
 
