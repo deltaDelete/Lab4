@@ -9,6 +9,9 @@
     <string name="delete_dialog_positive">DELETE</string>
     <string name="town_name">Town Name</string>
     <string name="country_name">Country</string>
-    <string name="add">ADD</string>
-    <string name="cancel">CANCEL</string>
+    <string name="add">Add</string>
+    <string name="flagcdn_png" translatable="false">https://flagcdn.com/w320/%s.png</string>
+    <string name="check_fields">Please ensure all fields are filled right</string>
+    <string name="can_not_be_empty">Can not be empty</string>
+    <string name="delete_dialog_message">You are going to delete town %s with country %s</string>
 </resources>

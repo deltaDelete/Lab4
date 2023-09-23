@@ -1,6 +1,5 @@
 package ru.deltadelete.lab5.ui.dialogs;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,12 +8,12 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.widget.ThemeUtils;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import ru.deltadelete.lab5.R;
+import ru.deltadelete.lab5.models.Town;
 
 public class AlertDialogFragment extends DialogFragment {
     @DrawableRes
@@ -26,15 +25,19 @@ public class AlertDialogFragment extends DialogFragment {
     @StringRes
     private int negativeButtonText;
 
-    private DialogInterface.OnClickListener positiveClick;
-    private DialogInterface.OnClickListener negativeClick;
+    private final DialogInterface.OnClickListener positiveClick;
+    private final DialogInterface.OnClickListener negativeClick;
+    private Town townToDelete;
 
     public static final String TITLE_ARG = "title";
     public static final String ICON_ARG = "icon";
     public static final String POSITIVE_BUTTON_ARG = "positive_button_text";
     public static final String NEGATIVE_BUTTON_ARG = "negative_button_text";
 
-    public AlertDialogFragment(DialogInterface.OnClickListener positiveClick, DialogInterface.OnClickListener negativeClick) {
+    public static final String TOWN_TO_DELETE = "townToDelete";
+
+    public AlertDialogFragment(DialogInterface.OnClickListener positiveClick,
+                               DialogInterface.OnClickListener negativeClick) {
         this.positiveClick = positiveClick;
         this.negativeClick = negativeClick;
     }
@@ -44,17 +47,15 @@ public class AlertDialogFragment extends DialogFragment {
                                                   @StringRes int negativeButtonText,
                                                   @DrawableRes int icon,
                                                   DialogInterface.OnClickListener positiveClick,
-                                                  DialogInterface.OnClickListener negativeClick
-    ) {
-        AlertDialogFragment frag = new AlertDialogFragment(
-                positiveClick,
-                negativeClick
-        );
+                                                  DialogInterface.OnClickListener negativeClick,
+                                                  Town townToDelete) {
+        AlertDialogFragment frag = new AlertDialogFragment(positiveClick, negativeClick);
         Bundle args = new Bundle();
         args.putInt(TITLE_ARG, title);
         args.putInt(ICON_ARG, icon);
         args.putInt(POSITIVE_BUTTON_ARG, positiveButtonText);
         args.putInt(NEGATIVE_BUTTON_ARG, negativeButtonText);
+        args.putSerializable(TOWN_TO_DELETE, townToDelete);
         frag.setArguments(args);
         return frag;
     }
@@ -67,11 +68,8 @@ public class AlertDialogFragment extends DialogFragment {
             this.title = getArguments().getInt(TITLE_ARG);
             this.positiveButtonText = getArguments().getInt(POSITIVE_BUTTON_ARG);
             this.negativeButtonText = getArguments().getInt(NEGATIVE_BUTTON_ARG);
+            this.townToDelete = (Town) getArguments().getSerializable(TOWN_TO_DELETE);
         }
-//        setStyle(
-//                DialogFragment.STYLE_NORMAL,
-//                com.google.android.material.R.style.MaterialAlertDialog_Material3
-//        );
     }
 
     @NonNull
@@ -83,7 +81,11 @@ public class AlertDialogFragment extends DialogFragment {
         )
                 .setIcon(icon)
                 .setTitle(title)
-//                .setIconAttribute(com.google.android.material.R.attr.materialAlertDialogTitleIconStyle)
+                .setMessage(getString(
+                        R.string.delete_dialog_message,
+                        townToDelete.getName(),
+                        townToDelete.getCountry()
+                ))
                 .setPositiveButton(positiveButtonText, positiveClick)
                 .setNegativeButton(negativeButtonText, negativeClick)
                 .create();

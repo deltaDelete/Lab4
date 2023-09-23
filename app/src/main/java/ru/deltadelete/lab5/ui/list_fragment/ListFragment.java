@@ -1,7 +1,6 @@
 package ru.deltadelete.lab5.ui.list_fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -66,7 +65,7 @@ public class ListFragment extends Fragment {
             if (activity == null) return;
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_view_main, new NewTownFragment(), "fragment_new_town")
+                    .replace(R.id.fragment_view_main, new NewTownFragment(adapter), "fragment_new_town")
                     .addToBackStack("fragment_new_town")
                     .commit();
         });
@@ -104,7 +103,8 @@ public class ListFragment extends Fragment {
                 R.string.delete_dialog_negative,
                 R.drawable.baseline_delete_32,
                 (d, i) -> animatedRemove(requireContext(), v, item),
-                (d, i) -> d.cancel());
+                (d, i) -> d.cancel(),
+                item);
         dialog.show(
                 getActivity().getSupportFragmentManager(),
                 "delete_item_dialog"

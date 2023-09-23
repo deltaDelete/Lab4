@@ -1,69 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="400dp"
     android:layout_height="match_parent"
-    tools:context=".ui.new_town_fragment.NewTownFragment">
+    android:layout_gravity="center_horizontal"
+    android:divider="@drawable/empty_horizontal_divider"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:showDividers="middle">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_town_name"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/town_name"
+        android:labelFor="@id/edit_text_town_name">
+
+        <EditText
+            android:id="@+id/edit_text_town_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_country_name"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/country_name"
+        android:labelFor="@id/dropdown_country">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/dropdown_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:importantForAccessibility="no" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/image_flag_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:placeholderImage="@android:color/darker_gray"
+        app:placeholderImageScaleType="centerCrop"
+        app:roundedCornerRadius="8dp"
+        app:viewAspectRatio="1.5" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:divider="@drawable/empty_vertical_divider"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:showDividers="middle">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/button_cancel"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/town_name">
+            android:text="@android:string/cancel" />
 
-            <EditText
-                android:id="@+id/edit_text_town_name"
-                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/country_name">
-
-            <EditText
-                android:id="@+id/edit_text_country"
-                style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                style="@style/Widget.Material3.Button.TonalButton"
-                android:text="@string/cancel" />
-
-            <Button
-                android:id="@+id/button_add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@string/add" />
-
-        </LinearLayout>
+            android:text="@string/add"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
+</LinearLayout>
 
-</FrameLayout>

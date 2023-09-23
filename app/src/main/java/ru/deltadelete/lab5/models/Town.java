@@ -4,7 +4,9 @@ import androidx.annotation.DrawableRes;
 
 import com.github.javafaker.Faker;
 
-public class Town {
+import java.io.Serializable;
+
+public class Town implements Serializable {
     private int id;
     private String name;
     private String country;
