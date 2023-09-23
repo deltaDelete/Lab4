@@ -8,4 +8,6 @@
     <string name="delete_dialog_title">Удалить этот элемент из списка?</string>
     <string name="delete_dialog_negative">Отмена</string>
     <string name="delete_dialog_positive">УДАЛИТЬ</string>
+    <string name="town_name">Название города</string>
+    <string name="country_name">Страна</string>
 </resources>

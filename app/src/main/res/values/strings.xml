@@ -7,4 +7,8 @@
     <string name="delete_dialog_title">Delete this item?</string>
     <string name="delete_dialog_negative">Cancel</string>
     <string name="delete_dialog_positive">DELETE</string>
+    <string name="town_name">Town Name</string>
+    <string name="country_name">Country</string>
+    <string name="add">ADD</string>
+    <string name="cancel">CANCEL</string>
 </resources>

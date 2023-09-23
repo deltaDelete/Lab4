@@ -16,6 +16,12 @@ public class NewTownFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding.buttonCancel.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager().popBackStack();
+        });
+        binding.buttonAdd.setOnClickListener(v -> {
+            // todo
+        });
     }
 
     @Override
