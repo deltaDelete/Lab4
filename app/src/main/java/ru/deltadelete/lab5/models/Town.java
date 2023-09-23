@@ -1,4 +1,4 @@
-package ru.deltadelete.lab5;
+package ru.deltadelete.lab5.models;
 
 import androidx.annotation.DrawableRes;
 

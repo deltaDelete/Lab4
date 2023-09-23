@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello empty fragment</string>
     <string name="town">Very long town name lorem ipsum dolor sit amet</string>
     <string name="add_item">Add town</string>
+    <string name="delete_dialog_title">Delete this item?</string>
+    <string name="delete_dialog_negative">Cancel</string>
+    <string name="delete_dialog_positive">DELETE</string>
 </resources>

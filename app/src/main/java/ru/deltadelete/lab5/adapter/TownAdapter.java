@@ -1,4 +1,4 @@
-package ru.deltadelete.lab5;
+package ru.deltadelete.lab5.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import ru.deltadelete.lab5.R;
+import ru.deltadelete.lab5.models.Town;
 
 import java.util.List;
 
@@ -84,5 +85,11 @@ public class TownAdapter extends ArrayAdapter<Town> {
     public synchronized void remove(@Nullable Town object) {
         items.remove(object);
         super.remove(object);
+    }
+
+    @Override
+    public synchronized void add(@Nullable Town object) {
+//        super.add(object);
+        items.add(object);
     }
 }

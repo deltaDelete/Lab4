@@ -1,4 +1,4 @@
-package ru.deltadelete.lab5;
+package ru.deltadelete.lab5.ui.new_town_fragment;
 
 import android.os.Bundle;
 

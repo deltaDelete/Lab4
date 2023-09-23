@@ -23,7 +23,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_view_main"
-        android:name="ru.deltadelete.lab5.ListFragment"
+        android:name="ru.deltadelete.lab5.ui.list_fragment.ListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

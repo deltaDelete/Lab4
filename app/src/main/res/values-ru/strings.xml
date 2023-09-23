@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Привет пустой фрагмент</string>
     <string name="town">Очень длинное название города lorem ipsum dolor sit amet</string>
     <string name="add_item">Добавить город</string>
+    <string name="delete_dialog_title">Удалить этот элемент из списка?</string>
+    <string name="delete_dialog_negative">Отмена</string>
+    <string name="delete_dialog_positive">УДАЛИТЬ</string>
 </resources>
