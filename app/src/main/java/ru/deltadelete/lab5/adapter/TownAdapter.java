@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.material.card.MaterialCardView;
 
 import ru.deltadelete.lab5.R;
 import ru.deltadelete.lab5.models.Town;
@@ -66,7 +66,7 @@ public class TownAdapter extends ArrayAdapter<Town> {
         TextView townName = view.findViewById(R.id.townName);
         TextView townCountry = view.findViewById(R.id.townCountry);
         SimpleDraweeView flag = view.findViewById(R.id.countryFlag);
-        CardView card = view.findViewById(R.id.card);
+        MaterialCardView card = view.findViewById(R.id.card);
 
         var town = items.get(position);
 
