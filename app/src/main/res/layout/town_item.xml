@@ -11,15 +11,15 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="8dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
+        style="?attr/materialCardViewOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
         android:clickable="true"
         android:longClickable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:elevation="16dp"
         app:cardCornerRadius="16dp">
 
         <LinearLayout
@@ -81,6 +81,6 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
