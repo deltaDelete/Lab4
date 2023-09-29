@@ -38,7 +38,9 @@ public class TownDetailsFragment extends Fragment {
         if (getArguments() != null) {
             this.town = (Town) getArguments().getSerializable(TOWN_ARG);
         }
-        var animation = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move);
+        var animation = TransitionInflater.from(requireContext()).inflateTransition(
+                android.R.transition.move
+        );
         setSharedElementEnterTransition(animation);
         setSharedElementReturnTransition(animation);
     }

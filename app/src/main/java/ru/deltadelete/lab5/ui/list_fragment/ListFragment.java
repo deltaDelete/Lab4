@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -63,9 +64,8 @@ public class ListFragment extends Fragment {
 
     private void initButtonAdd() {
         binding.buttonAdd.setOnClickListener(v -> {
-            Activity activity = getActivity();
-            if (activity == null) return;
-            getActivity().getSupportFragmentManager()
+            FragmentActivity activity = requireActivity();
+            activity.getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_view_main, new NewTownFragment(), "fragment_new_town")
                     .addToBackStack("fragment_new_town")
@@ -84,9 +84,10 @@ public class ListFragment extends Fragment {
         adapter = new TownAdapter(context, viewModel.getTowns());
         adapter.setOnItemClickListener((v, item, position) -> {
             Toast.makeText(context, item.getName(), Toast.LENGTH_SHORT).show();
-            getActivity().getSupportFragmentManager()
+            requireActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.fragment_view_main, TownDetailsFragment.newInstance(item), "fragment_town_details")
+                    .addSharedElement(v, "townContainer")
                     .addSharedElement(v.findViewById(R.id.countryFlag), "countryFlag")
                     .addSharedElement(v.findViewById(R.id.townName), "townName")
                     .addSharedElement(v.findViewById(R.id.townCountry), "townCountry")
@@ -109,7 +110,7 @@ public class ListFragment extends Fragment {
                 (d, i) -> d.cancel(),
                 item);
         dialog.show(
-                getActivity().getSupportFragmentManager(),
+                requireActivity().getSupportFragmentManager(),
                 "delete_item_dialog"
         );
 
