@@ -8,15 +8,20 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
+import ru.deltadelete.lab5.MyViewModel
 import ru.deltadelete.lab5.R
 import ru.deltadelete.lab5.adapter.TownAdapter
 import ru.deltadelete.lab5.databinding.FragmentNewTownBinding
 import ru.deltadelete.lab5.models.Town
 import java.util.Locale
 import java.util.stream.Collectors
+import kotlin.reflect.typeOf
 
-class NewTownFragment(private val adapter: TownAdapter) : Fragment() {
+class NewTownFragment() : Fragment() {
     private var binding: FragmentNewTownBinding? = null
+    private var viewModel: MyViewModel? = null
     private var selectedCountry: Locale? = null
         set(selectedCountry) {
             field = selectedCountry
@@ -43,6 +48,9 @@ class NewTownFragment(private val adapter: TownAdapter) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (viewModel == null) {
+            viewModel = ViewModelProvider(requireActivity()).get<MyViewModel>()
+        }
         initButtons()
         initCountryPicker()
         initValidation()
@@ -99,7 +107,7 @@ class NewTownFragment(private val adapter: TownAdapter) : Fragment() {
                         .show()
                 return@setOnClickListener
             }
-            adapter.add(
+            viewModel?.adapter?.add(
                     Town(
                             binding!!.editTextTownName.text.toString(),
                             selectedCountry!!.displayCountry,

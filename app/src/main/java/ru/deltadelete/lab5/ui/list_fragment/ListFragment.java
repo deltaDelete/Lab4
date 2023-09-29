@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.android.material.card.MaterialCardView;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import ru.deltadelete.lab5.MyViewModel;
 import ru.deltadelete.lab5.ui.dialogs.AlertDialogFragment;
 import ru.deltadelete.lab5.ui.new_town_fragment.NewTownFragment;
 import ru.deltadelete.lab5.R;
@@ -48,13 +50,12 @@ public class ListFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private Locale getCurrentLocale() {
-        return getResources().getConfiguration().getLocales().get(0);
-    }
+    public MyViewModel viewModel;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(requireActivity()).get(MyViewModel.class);
         initList();
         initButtonAdd();
     }
@@ -65,33 +66,26 @@ public class ListFragment extends Fragment {
             if (activity == null) return;
             getActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_view_main, new NewTownFragment(adapter), "fragment_new_town")
+                    .replace(R.id.fragment_view_main, new NewTownFragment(), "fragment_new_town")
                     .addToBackStack("fragment_new_town")
                     .commit();
         });
     }
 
-    TownAdapter adapter;
+//    TownAdapter adapter;
+
     private void initList() {
+        TownAdapter adapter = viewModel.getAdapter();
         if (adapter != null) {
             binding.listViewFl.setAdapter(adapter);
-            return;
         }
-
-        var towns = new ArrayList<Town>();
-        var faker = new Faker(getCurrentLocale());
-        for (int i = 0; i < 5; i++) {
-            towns.add(Town.fromFaker(faker));
-        }
-
         Context context = requireContext();
-
-        adapter = new TownAdapter(context, towns);
+        adapter = new TownAdapter(context, viewModel.getTowns());
         adapter.setOnItemClickListener((v, item, position) -> {
             Toast.makeText(context, item.getName(), Toast.LENGTH_SHORT).show();
         });
         adapter.setOnLongItemClickListener(this::onLongItemClick);
-
+        viewModel.setAdapter(adapter);
         binding.listViewFl.setAdapter(adapter);
     }
 
@@ -128,7 +122,7 @@ public class ListFragment extends Fragment {
                     card.setBackgroundTintList(finalColor);
                 })
                 .withEndAction(() -> {
-                    adapter.remove(item);
+                    viewModel.getAdapter().remove(item);
                     v.animate().translationXBy(v.getWidth()).setDuration(0).start();
                     v.setBackgroundTintList(initialColor);
                 })

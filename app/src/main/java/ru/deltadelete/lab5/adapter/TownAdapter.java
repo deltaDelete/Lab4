@@ -1,6 +1,8 @@
 package ru.deltadelete.lab5.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,9 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.android.material.card.MaterialCardView;
 
 import ru.deltadelete.lab5.R;
@@ -27,6 +31,14 @@ public class TownAdapter extends ArrayAdapter<Town> {
     private int layout;
     private List<Town> items;
     private OnItemClickListener onItemClickListener;
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public OnLongClickListener getOnLongItemClickListener() {
+        return onLongItemClickListener;
+    }
 
     private OnLongClickListener onLongItemClickListener;
 
@@ -72,6 +84,10 @@ public class TownAdapter extends ArrayAdapter<Town> {
 
         townName.setText(town.getName());
         townCountry.setText(town.getCountry());
+        var req = ImageRequestBuilder.newBuilderWithSource(Uri.parse(town.getFlagUrl()))
+                        .build();
+        Log.d("IMAGE", String.valueOf(req.getPreferredWidth()));
+        Log.d("IMAGE", String.valueOf(req.getPreferredHeight()));
         flag.setImageURI(town.getFlagUrl());
         card.setOnClickListener((v) -> {
             onItemClickListener.onClick(view, town, position);
