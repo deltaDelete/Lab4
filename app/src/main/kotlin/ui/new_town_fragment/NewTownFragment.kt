@@ -12,12 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import ru.deltadelete.lab5.MyViewModel
 import ru.deltadelete.lab5.R
-import ru.deltadelete.lab5.adapter.TownAdapter
 import ru.deltadelete.lab5.databinding.FragmentNewTownBinding
 import ru.deltadelete.lab5.models.Town
 import java.util.Locale
 import java.util.stream.Collectors
-import kotlin.reflect.typeOf
 
 class NewTownFragment() : Fragment() {
     private var binding: FragmentNewTownBinding? = null
@@ -27,10 +25,10 @@ class NewTownFragment() : Fragment() {
             field = selectedCountry
             if (selectedCountry != null) {
                 binding!!.imageFlagPreview.setImageURI(
-                        getString(
-                                R.string.flagcdn_png,
-                                selectedCountry.country.lowercase(Locale.getDefault())
-                        )
+                    getString(
+                        R.string.flagcdn_png,
+                        selectedCountry.country.lowercase(Locale.getDefault())
+                    )
                 )
             }
         }
@@ -40,8 +38,10 @@ class NewTownFragment() : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = FragmentNewTownBinding.inflate(inflater, container, false)
         return binding!!.root
     }
@@ -57,16 +57,20 @@ class NewTownFragment() : Fragment() {
     }
 
     private fun initValidation() {
-        binding!!.editTextTownName.addTextChangedListener(TextFieldValidation(
+        binding!!.editTextTownName.addTextChangedListener(
+            TextFieldValidation(
                 requireContext(),
                 binding!!.editTextTownName,
                 binding!!.inputLayoutTownName
-        ))
-        binding!!.dropdownCountry.addTextChangedListener(TextFieldValidation(
+            )
+        )
+        binding!!.dropdownCountry.addTextChangedListener(
+            TextFieldValidation(
                 requireContext(),
                 binding!!.dropdownCountry,
                 binding!!.inputLayoutCountryName
-        ))
+            )
+        )
     }
 
     private fun initCountryPicker() {
@@ -84,14 +88,15 @@ class NewTownFragment() : Fragment() {
             o1.displayCountry.compareTo(o2.displayCountry, ignoreCase = true)
         }
 
-        binding!!.dropdownCountry.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            selectedCountry = locales[position]
-        }
+        binding!!.dropdownCountry.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                selectedCountry = locales[position]
+            }
 
         val adapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                locales.stream().map { obj: Locale -> obj.displayCountry }.collect(Collectors.toList())
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            locales.stream().map { obj: Locale -> obj.displayCountry }.collect(Collectors.toList())
         )
 
         binding!!.dropdownCountry.setAdapter(adapter)
@@ -104,18 +109,18 @@ class NewTownFragment() : Fragment() {
         binding!!.buttonAdd.setOnClickListener {
             if (!isDataRight) {
                 Toast.makeText(requireContext(), R.string.check_fields, Toast.LENGTH_LONG)
-                        .show()
+                    .show()
                 return@setOnClickListener
             }
             viewModel?.adapter?.add(
-                    Town(
-                            binding!!.editTextTownName.text.toString(),
-                            selectedCountry!!.displayCountry,
-                            getString(
-                                    R.string.flagcdn_png,
-                                    selectedCountry!!.country.lowercase(Locale.getDefault())
-                            )
+                Town(
+                    binding!!.editTextTownName.text.toString(),
+                    selectedCountry!!.displayCountry,
+                    getString(
+                        R.string.flagcdn_png,
+                        selectedCountry!!.country.lowercase(Locale.getDefault())
                     )
+                )
             )
             requireActivity().supportFragmentManager.popBackStack()
         }
@@ -125,15 +130,15 @@ class NewTownFragment() : Fragment() {
         get() {
             when {
                 !validateTownName(
-                        binding!!.editTextTownName,
-                        requireContext(),
-                        binding!!.inputLayoutTownName
+                    binding!!.editTextTownName,
+                    requireContext(),
+                    binding!!.inputLayoutTownName
                 ) -> return false
 
                 !validateCountry(
-                        binding!!.dropdownCountry,
-                        requireContext(),
-                        binding!!.inputLayoutCountryName
+                    binding!!.dropdownCountry,
+                    requireContext(),
+                    binding!!.inputLayoutCountryName
                 ) -> return false
 
                 binding!!.inputLayoutTownName.error != null -> return false
