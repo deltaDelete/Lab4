@@ -43,6 +43,7 @@
 
                 <TextView
                     android:id="@+id/townName"
+                    android:transitionName="townName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLength="30"
@@ -53,6 +54,7 @@
 
                 <TextView
                     android:id="@+id/townCountry"
+                    android:transitionName="townCountry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="false"
@@ -63,6 +65,7 @@
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/countryFlag"
+                android:transitionName="countryFlag"
                 android:layout_width="64dp"
                 android:layout_weight="0"
                 android:layout_height="wrap_content"

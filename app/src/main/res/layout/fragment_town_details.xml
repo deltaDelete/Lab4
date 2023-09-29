@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?android:colorBackground"
+    tools:context=".ui.town_details_fragment.TownDetailsFragment"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/countryFlag"
+        android:transitionName="countryFlag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:viewAspectRatio="1.5"
+        android:scaleType="fitXY"
+        app:placeholderImage="@android:color/darker_gray"
+        app:roundedCornerRadius="32dp"
+        app:roundBottomStart="true"
+        app:roundBottomEnd="true"
+        app:roundTopStart="false"
+        app:roundTopEnd="false" />
+
+    <TextView
+        android:id="@+id/townName"
+        android:transitionName="townName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingHorizontal="16dp"
+        android:singleLine="false"
+        android:text="@string/town"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/townCountry"
+        android:transitionName="townCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:singleLine="false"
+        android:text="@string/country"
+        android:textSize="24sp" />
+
+</LinearLayout>

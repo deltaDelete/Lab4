@@ -28,6 +28,7 @@ import ru.deltadelete.lab5.R;
 import ru.deltadelete.lab5.models.Town;
 import ru.deltadelete.lab5.adapter.TownAdapter;
 import ru.deltadelete.lab5.databinding.FragmentListBinding;
+import ru.deltadelete.lab5.ui.town_details_fragment.TownDetailsFragment;
 
 public class ListFragment extends Fragment {
 
@@ -83,6 +84,14 @@ public class ListFragment extends Fragment {
         adapter = new TownAdapter(context, viewModel.getTowns());
         adapter.setOnItemClickListener((v, item, position) -> {
             Toast.makeText(context, item.getName(), Toast.LENGTH_SHORT).show();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_view_main, TownDetailsFragment.newInstance(item), "fragment_town_details")
+                    .addSharedElement(v.findViewById(R.id.countryFlag), "countryFlag")
+                    .addSharedElement(v.findViewById(R.id.townName), "townName")
+                    .addSharedElement(v.findViewById(R.id.townCountry), "townCountry")
+                    .addToBackStack("fragment_town_details")
+                    .commit();
         });
         adapter.setOnLongItemClickListener(this::onLongItemClick);
         viewModel.setAdapter(adapter);

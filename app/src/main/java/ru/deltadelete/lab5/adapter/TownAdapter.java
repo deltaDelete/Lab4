@@ -90,7 +90,7 @@ public class TownAdapter extends ArrayAdapter<Town> {
         Log.d("IMAGE", String.valueOf(req.getPreferredHeight()));
         flag.setImageURI(town.getFlagUrl());
         card.setOnClickListener((v) -> {
-            onItemClickListener.onClick(view, town, position);
+            onItemClickListener.onClick(v, town, position);
         });
         card.setOnLongClickListener(v -> onLongItemClickListener.onLongClick(view, town, position));
 

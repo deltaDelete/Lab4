@@ -25,4 +25,9 @@ public class LocaleHelper {
         LocaleHelper.locales = locales;
         return LocaleHelper.locales;
     }
+
+    public static Locale getCurrentLocale() {
+        return Locale.getDefault();
+        // return getApplication().getResources().getConfiguration().getLocales().get(0);
+    }
 }
