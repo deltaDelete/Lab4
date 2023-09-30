@@ -15,14 +15,24 @@ public class Town implements Serializable {
     private int id;
     private String name;
     private String country;
+
+    private String description;
     @DrawableRes
     private int flag;
     private String flagUrl;
+
+    public Town(String name, String country, String flagUrl, String description) {
+        this.name = name;
+        this.country = country;
+        this.flagUrl = flagUrl;
+        this.description = description;
+    }
 
     public Town(String name, String country, String flagUrl) {
         this.name = name;
         this.country = country;
         this.flagUrl = flagUrl;
+        this.description = "";
     }
 
     public static Town fromFaker(Faker faker) {
@@ -31,7 +41,8 @@ public class Town implements Serializable {
         return new Town(
                 faker.address().city(),
                 locale.getDisplayCountry(),
-                String.format("https://flagcdn.com/w320/%s.png", locale.getCountry().toLowerCase())
+                String.format("https://flagcdn.com/w320/%s.png", locale.getCountry().toLowerCase()),
+                faker.lorem().paragraph(10)
         );
     }
 
@@ -65,5 +76,9 @@ public class Town implements Serializable {
 
     public void setFlagUrl(String flagUrl) {
         this.flagUrl = flagUrl;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

@@ -64,5 +64,6 @@ public class TownDetailsFragment extends Fragment {
         binding.countryFlag.setImageURI(town.getFlagUrl());
         binding.townName.setText(town.getName());
         binding.townCountry.setText(town.getCountry());
+        binding.townDescription.setText(town.getDescription());
     }
 }
