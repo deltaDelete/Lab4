@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_main"
+            app:menu="@menu/app_bar_menu"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name" />

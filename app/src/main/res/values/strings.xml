@@ -14,4 +14,7 @@
     <string name="check_fields">Please ensure all fields are filled right</string>
     <string name="can_not_be_empty">Can not be empty</string>
     <string name="delete_dialog_message">You are going to delete town %s with country %s</string>
+    <string name="settings">Settings</string>
+    <string name="username">Username</string>
+    <string name="language">Language</string>
 </resources>

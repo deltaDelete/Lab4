@@ -1,13 +1,17 @@
 package ru.deltadelete.lab5;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.color.DynamicColors;
 
 import ru.deltadelete.lab5.databinding.ActivityMainBinding;
+import ru.deltadelete.lab5.ui.settings_fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,5 +36,22 @@ public class MainActivity extends AppCompatActivity {
 //                    // .addToBackStack("list_fragment_transaction") // Зачем возвращаться на пустое?
 //                    .commit();
 //        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.app_bar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.settings_menu_item) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_view_main, SettingsFragment.newInstance())
+                    .commit();
+            return true;
+        }
+        return false;
     }
 }

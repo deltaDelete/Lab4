@@ -14,4 +14,7 @@
     <string name="check_fields">Пожалуйста, удостоверьтесь, что все поля заполнены правильно</string>
     <string name="can_not_be_empty">Не может быть пустым</string>
     <string name="delete_dialog_message">Вы собираетесь удалить город %s со страной %s</string>
+    <string name="settings">Настройки</string>
+    <string name="username">Имя пользователя</string>
+    <string name="language">Язык</string>
 </resources>

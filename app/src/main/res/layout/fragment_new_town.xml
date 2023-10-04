@@ -39,7 +39,7 @@
             android:id="@+id/dropdown_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
+            android:inputType="none"
             android:importantForAccessibility="no" />
 
     </com.google.android.material.textfield.TextInputLayout>

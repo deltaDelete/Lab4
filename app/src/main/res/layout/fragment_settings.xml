@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/empty_horizontal_divider"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="?android:colorBackground"
+    android:padding="16dp"
+    android:showDividers="middle">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_text_username"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/username" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_theme"
+        android:text="Dark mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/language"
+        android:labelFor="@id/spinner_language">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/spinner_language"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <NumberPicker
+        android:id="@+id/number_picker_amount_of_generated_towns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
