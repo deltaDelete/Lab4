@@ -46,4 +46,10 @@
         android:id="@+id/number_picker_amount_of_generated_towns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_save"
+        android:text="СОХРАНИТЬ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

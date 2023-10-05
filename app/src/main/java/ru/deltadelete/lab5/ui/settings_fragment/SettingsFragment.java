@@ -2,33 +2,20 @@ package ru.deltadelete.lab5.ui.settings_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.os.LocaleListCompat;
 import androidx.fragment.app.Fragment;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import ru.deltadelete.lab5.MyViewModel;
 import ru.deltadelete.lab5.databinding.FragmentSettingsBinding;
-import ru.deltadelete.lab5.databinding.FragmentTownDetailsBinding;
 import ru.deltadelete.lab5.helpers.SharedPreferencesHelper;
-import ru.deltadelete.lab5.models.Town;
-import ru.deltadelete.lab5.ui.town_details_fragment.TownDetailsFragment;
+import timber.log.Timber;
 
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
@@ -59,28 +46,18 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        logPrefs();
         initViews();
+        initSaveButton();
+    }
+
+    private void initSaveButton() {
+        binding.buttonSave.setOnClickListener(this::onSave);
     }
 
     private void initViews() {
         Context context = requireContext();
         binding.editTextUsername.setText(SharedPreferencesHelper.getString(context, "USERNAME"));
-        binding.editTextUsername.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                SharedPreferencesHelper.putString(context, "USERNAME", s.toString());
-            }
-        });
 
         binding.switchTheme.setChecked(SharedPreferencesHelper.getBool(context, "DARK_THEME"));
 
@@ -88,30 +65,40 @@ public class SettingsFragment extends Fragment {
         binding.numberPickerAmountOfGeneratedTowns.setMaxValue(100);
         binding.numberPickerAmountOfGeneratedTowns.setValue(SharedPreferencesHelper.getInt(context, "TOWN_AMOUNT"));
 
-        String[] locales = getResources().getAssets().getLocales();
+        List<String> locales = List.of(getResources().getAssets().getLocales());
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                com.google.android.material.R.layout.m3_auto_complete_simple_item,
+                android.R.layout.simple_dropdown_item_1line,
                 locales);
         binding.spinnerLanguage.setAdapter(adapter);
-        binding.spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                var selected = adapter.getItem(position);
-                SharedPreferencesHelper.putString(context, "LANG", selected);
-//                Stream.of(locales)
-//                        .filter(it -> it.equals(selected))
-//                        .findFirst().ifPresent(it ->
-//                                SharedPreferencesHelper.putString(context, "LANG", it)
-//                        );
-            }
+        String settingsLang = SharedPreferencesHelper.getString(context, "LANG");
+        binding.spinnerLanguage.setText(settingsLang, false);
+    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        var settingsLang = SharedPreferencesHelper.getString(context, "LANG");
-        binding.spinnerLanguage.setSelection(
-                !settingsLang.isBlank() ? adapter.getPosition(settingsLang) : 0
-        );
+    private void onSave(View v) {
+        Context context = requireActivity().getApplicationContext();
+        String username = binding.editTextUsername.getText().toString();
+        boolean darkTheme = binding.switchTheme.isChecked();
+        int townAmount = binding.numberPickerAmountOfGeneratedTowns.getValue();
+        String lang = binding.spinnerLanguage.getText().toString();
+
+        Timber.tag("INFO").i("Prefs: %s, %b, %d, %s", username, darkTheme, townAmount, lang);
+
+        SharedPreferencesHelper.putString(context, "USERNAME", username);
+        SharedPreferencesHelper.putBool(context, "DARK_THEME", darkTheme);
+        SharedPreferencesHelper.putInt(context, "TOWN_AMOUNT", townAmount);
+        SharedPreferencesHelper.putString(context, "LANG", lang);
+
+        logPrefs();
+    }
+
+    private void logPrefs() {
+        Context context = requireActivity().getApplicationContext();
+
+        String username = SharedPreferencesHelper.getString(context, "USERNAME");
+        boolean darkTheme = SharedPreferencesHelper.getBool(context, "DARK_THEME");
+        int townAmount = SharedPreferencesHelper.getInt(context, "TOWN_AMOUNT");
+        String lang = SharedPreferencesHelper.getString(context, "LANG");
+
+        Timber.tag("INFO").i("Loaded Prefs: %s, %b, %d, %s", username, darkTheme, townAmount, lang);
     }
 }
