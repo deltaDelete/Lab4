@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.settings_menu_item) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_view_main, SettingsFragment.newInstance())
+                    .addToBackStack("settings_fragment")
                     .commit();
             return true;
         }
