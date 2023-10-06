@@ -17,4 +17,7 @@
     <string name="settings">Настройки</string>
     <string name="username">Имя пользователя</string>
     <string name="language">Язык</string>
+    <string name="load_flags">Загружать флаги</string>
+    <string name="dark_mode">Темная тема</string>
+    <string name="save">Сохранить</string>
 </resources>

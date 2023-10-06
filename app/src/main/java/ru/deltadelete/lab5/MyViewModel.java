@@ -12,6 +12,7 @@ import java.util.Locale;
 
 import ru.deltadelete.lab5.adapter.TownAdapter;
 import ru.deltadelete.lab5.helpers.LocaleHelper;
+import ru.deltadelete.lab5.helpers.SharedPreferencesHelper;
 import ru.deltadelete.lab5.models.Town;
 
 public class MyViewModel extends AndroidViewModel {
@@ -28,8 +29,10 @@ public class MyViewModel extends AndroidViewModel {
     }
     private void initTowns() {
         towns = new ArrayList<Town>();
+        var context = getApplication().getApplicationContext();
+        var amount = SharedPreferencesHelper.getInt(context, "TOWN_AMOUNT");
         var faker = new Faker(LocaleHelper.getCurrentLocale());
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < amount; i++) {
             towns.add(Town.fromFaker(faker));
         }
     }

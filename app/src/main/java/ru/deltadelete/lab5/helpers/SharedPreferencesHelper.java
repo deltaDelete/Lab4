@@ -71,7 +71,7 @@ public class SharedPreferencesHelper {
                     Context.MODE_PRIVATE
             );
         }
-        return prefs.getInt(key, Context.MODE_PRIVATE);
+        return prefs.getInt(key, 0);
     }
 
     public static float getFloat(Context context, String key) {
