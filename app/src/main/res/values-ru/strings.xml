@@ -20,4 +20,5 @@
     <string name="load_flags">Загружать флаги</string>
     <string name="dark_mode">Темная тема</string>
     <string name="save">Сохранить</string>
+    <string name="settings_changes_toast">Изменения будут применены после перезапуска</string>
 </resources>

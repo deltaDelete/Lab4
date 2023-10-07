@@ -2,6 +2,8 @@ package ru.deltadelete.lab5;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.UiModeManager;
 import android.content.res.Resources;
@@ -12,24 +14,23 @@ import android.view.MenuItem;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.material.color.DynamicColors;
 
-import org.apache.commons.lang3.LocaleUtils;
-
 import java.util.Locale;
 
 import ru.deltadelete.lab5.databinding.ActivityMainBinding;
-import ru.deltadelete.lab5.helpers.SharedPreferencesHelper;
 import ru.deltadelete.lab5.ui.settings_fragment.SettingsFragment;
+import ru.deltadelete.lab5.ui.settings_fragment.SettingsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private SettingsViewModel settingsVm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DynamicColors.applyToActivityIfAvailable(this);
         Fresco.initialize(this); // Подгрузчик картинок от Facebook
-
+        settingsVm = new ViewModelProvider(this).get(SettingsViewModel.class);
         setLocale();
         setThemeMode();
 
@@ -41,26 +42,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setThemeMode() {
-        boolean darkModeEnabled = SharedPreferencesHelper.getBool(this, "DARK_THEME");
+        boolean darkModeEnabled = settingsVm.isDarkTheme();
         UiModeManager ui = (UiModeManager) this.getSystemService(UI_MODE_SERVICE);
         if (darkModeEnabled) {
-            ui.setNightMode(UiModeManager.MODE_NIGHT_YES);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
         else {
-            ui.setNightMode(UiModeManager.MODE_NIGHT_NO);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
 
     private void setLocale() {
-        String lang = SharedPreferencesHelper.getString(getApplicationContext(), "LANG");
-
-        Locale locale = new Locale(lang);
+        Locale locale = settingsVm.getLanguage();
         Resources res = getResources();
         var conf = res.getConfiguration();
+        var metrics = res.getDisplayMetrics();
         conf.setLocale(locale);
         Locale.setDefault(locale);
         createConfigurationContext(conf);
-        res.updateConfiguration(conf, res.getDisplayMetrics());
+        res.updateConfiguration(conf, metrics);
     }
 
     @Override

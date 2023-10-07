@@ -1,8 +1,6 @@
 package ru.deltadelete.lab5.adapter;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +11,13 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.android.material.card.MaterialCardView;
 
 import ru.deltadelete.lab5.R;
+import ru.deltadelete.lab5.helpers.SharedPreferencesHelper;
 import ru.deltadelete.lab5.models.Town;
+import ru.deltadelete.lab5.ui.settings_fragment.SettingsViewModel;
 
 import java.util.List;
 
@@ -84,11 +82,9 @@ public class TownAdapter extends ArrayAdapter<Town> {
 
         townName.setText(town.getName());
         townCountry.setText(town.getCountry());
-        var req = ImageRequestBuilder.newBuilderWithSource(Uri.parse(town.getFlagUrl()))
-                        .build();
-        Log.d("IMAGE", String.valueOf(req.getPreferredWidth()));
-        Log.d("IMAGE", String.valueOf(req.getPreferredHeight()));
-        flag.setImageURI(town.getFlagUrl());
+        if (SharedPreferencesHelper.getBool(context, SettingsViewModel.LOAD_FLAGS_KEY)) {
+            flag.setImageURI(town.getFlagUrl());
+        }
         card.setOnClickListener((v) -> {
             onItemClickListener.onClick(v, town, position);
         });

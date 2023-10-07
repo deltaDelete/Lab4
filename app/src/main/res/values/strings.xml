@@ -20,4 +20,5 @@
     <string name="load_flags">Load flags</string>
     <string name="dark_mode">Dark mode</string>
     <string name="save">Save</string>
+    <string name="settings_changes_toast">Changes will be applied after application restart</string>
 </resources>

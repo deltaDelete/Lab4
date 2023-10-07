@@ -2,21 +2,26 @@ package ru.deltadelete.lab5.ui.settings_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
 import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.List;
 import java.util.Locale;
 
+import ru.deltadelete.lab5.R;
 import ru.deltadelete.lab5.adapter.LocaleAdapter;
 import ru.deltadelete.lab5.databinding.FragmentSettingsBinding;
 import ru.deltadelete.lab5.helpers.SharedPreferencesHelper;
@@ -25,6 +30,11 @@ import timber.log.Timber;
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
     private LocaleAdapter adapter;
+    private SettingsViewModel viewModel;
+    private static final List<Locale> locales = List.of(
+            LocaleUtils.toLocale("ru_RU"),
+            LocaleUtils.toLocale("en_US")
+    );
 
     public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
@@ -46,6 +56,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        viewModel = new ViewModelProvider(requireActivity()).get(SettingsViewModel.class);
         return binding.getRoot();
     }
 
@@ -55,6 +66,7 @@ public class SettingsFragment extends Fragment {
         logPrefs();
         initViews();
         initSaveButton();
+        initOnChangeActions();
     }
 
     private void initSaveButton() {
@@ -63,55 +75,69 @@ public class SettingsFragment extends Fragment {
 
     private void initViews() {
         Context context = requireContext();
-        binding.editTextUsername.setText(SharedPreferencesHelper.getString(context, "USERNAME"));
+        binding.editTextUsername.setText(viewModel.getUsername());
 
-        binding.switchTheme.setChecked(SharedPreferencesHelper.getBool(context, "DARK_THEME"));
+        binding.switchTheme.setChecked(viewModel.isDarkTheme());
+        binding.switchLoadFlags.setChecked(viewModel.isLoadFlags());
 
         binding.numberPickerAmountOfGeneratedTowns.setMinValue(0);
         binding.numberPickerAmountOfGeneratedTowns.setMaxValue(100);
-        binding.numberPickerAmountOfGeneratedTowns.setValue(SharedPreferencesHelper.getInt(context, "TOWN_AMOUNT"));
+        binding.numberPickerAmountOfGeneratedTowns.setValue(viewModel.getTownAmount());
 
-        List<Locale> locales = List.of(
-                LocaleUtils.toLocale("ru_RU"),
-                LocaleUtils.toLocale("en_US")
-        );
         adapter = new LocaleAdapter(context,
                 locales);
         binding.spinnerLanguage.setAdapter(adapter);
-        binding.spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                langCode = adapter.getItem(position).getLanguage();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                langCode = Locale.getDefault().getLanguage();
-            }
-        });
-        String settingsLang = SharedPreferencesHelper.getString(context, "LANG");
-        var locale = new Locale(settingsLang);
-        binding.spinnerLanguage.setText(locale.getDisplayLanguage(), false);
+        Locale lang = viewModel.getLanguage();
+        String text = lang.getDisplayLanguage();
+        String displayText = text.substring(0, 1).toUpperCase() + text.substring(1);
+        binding.spinnerLanguage.setText(displayText, false);
     }
 
-    private String langCode = "";
     private void onSave(View v) {
-        Context context = requireActivity().getApplicationContext();
-        String username = binding.editTextUsername.getText().toString();
-        boolean darkTheme = binding.switchTheme.isChecked();
-        int townAmount = binding.numberPickerAmountOfGeneratedTowns.getValue();
-        String lang = binding.spinnerLanguage.getText().toString();
-        boolean loadFlags = binding.switchLoadFlags.isChecked();
+        Toast.makeText(
+                        requireContext(),
+                        R.string.settings_changes_toast,
+                        Toast.LENGTH_LONG
+                )
+                .show();
+    }
 
-        Timber.tag("INFO").i("Prefs: %s, %b, %d, %s, %b", username, darkTheme, townAmount, lang, loadFlags);
+    private void initOnChangeActions() {
+        binding.spinnerLanguage.setOnItemClickListener((parent, view, position, id) -> {
+            Locale item = adapter.getItem(position);
+            viewModel.setLanguage(item);
+            String text = item.getDisplayLanguage();
+            String displayText = text.substring(0, 1).toUpperCase() + text.substring(1);
+            binding.spinnerLanguage.setText(displayText, false);
+        });
 
-        SharedPreferencesHelper.putString(context, "USERNAME", username);
-        SharedPreferencesHelper.putBool(context, "DARK_THEME", darkTheme);
-        SharedPreferencesHelper.putInt(context, "TOWN_AMOUNT", townAmount);
-        SharedPreferencesHelper.putString(context, "LANG", lang);
-        SharedPreferencesHelper.putBool(context, "LOAD_FLAGS", loadFlags);
+        binding.switchTheme.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            viewModel.setDarkTheme(isChecked);
+        });
+        binding.switchLoadFlags.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            viewModel.setLoadFlags(isChecked);
+        });
 
-        logPrefs();
+        binding.numberPickerAmountOfGeneratedTowns.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            viewModel.setTownAmount(newVal);
+        });
+
+        binding.editTextUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                viewModel.setUsername(s.toString());
+            }
+        });
     }
 
     private void logPrefs() {

@@ -42,14 +42,6 @@ public class LocaleAdapter extends ArrayAdapter<Locale> {
 
     private TownAdapter.OnLongClickListener onLongItemClickListener;
 
-    public interface OnItemClickListener {
-        void onClick(View view, Town item, int position);
-    }
-
-    public interface OnLongClickListener {
-        boolean onLongClick(View view, Town item, int position);
-    }
-
     public LocaleAdapter(Context context, List<Locale> items) {
         super(context, android.R.layout.simple_dropdown_item_1line, items);
         this.context = context;
@@ -70,8 +62,10 @@ public class LocaleAdapter extends ArrayAdapter<Locale> {
         TextView text = view.findViewById(android.R.id.text1);
 
         var item = items.get(position);
+        String textStr = item.getDisplayLanguage();
+        textStr = textStr.substring(0, 1).toUpperCase() + textStr.substring(1);
 
-        text.setText(item.getDisplayLanguage());
+        text.setText(textStr);
 
         return view;
     }
@@ -86,5 +80,8 @@ public class LocaleAdapter extends ArrayAdapter<Locale> {
     public synchronized void add(@Nullable Locale object) {
 //        super.add(object);
         items.add(object);
+        notifyDataSetChanged();
     }
+
+
 }
