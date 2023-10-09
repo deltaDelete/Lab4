@@ -31,6 +31,7 @@ public class SharedPreferencesHelper {
         editor.putBoolean(key, value);
         editor.apply();
     }
+
     public static void putInt(Context context, String key, int value) {
         if (prefs == null) {
             prefs = context.getSharedPreferences(
@@ -42,6 +43,7 @@ public class SharedPreferencesHelper {
         editor.putInt(key, value);
         editor.apply();
     }
+
     public static void putFloat(Context context, String key, float value) {
         if (prefs == null) {
             prefs = context.getSharedPreferences(

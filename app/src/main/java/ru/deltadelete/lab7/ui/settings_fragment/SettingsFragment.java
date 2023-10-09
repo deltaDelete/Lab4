@@ -83,17 +83,21 @@ public class SettingsFragment extends Fragment {
         binding.numberPickerAmountOfGeneratedTowns.setMaxValue(100);
         binding.numberPickerAmountOfGeneratedTowns.setValue(viewModel.getTownAmount());
 
-        adapter = new LocaleAdapter(context,
-                locales);
+        adapter = new LocaleAdapter(
+                context,
+                locales
+        );
         binding.spinnerLanguage.setAdapter(adapter);
         Locale lang = viewModel.getLanguage();
-        var displayLanguages = locales.stream().map(it -> it.getDisplayLanguage()).collect(Collectors.toList());
+        List<String> displayLanguages = locales.stream().map(
+                it -> it.getDisplayLanguage()).collect(Collectors.toList()
+        );
         String text = lang.getDisplayLanguage();
         if (!displayLanguages.contains(lang.getDisplayLanguage())) {
             text = locales.get(0).getDisplayLanguage();
         }
         String displayText = text.length() < 2 ? text.toUpperCase() :
-                text.substring(0, 1).toUpperCase() + text.substring(1);
+                             text.substring(0, 1).toUpperCase() + text.substring(1);
         binding.spinnerLanguage.setText(displayText, false);
     }
 
