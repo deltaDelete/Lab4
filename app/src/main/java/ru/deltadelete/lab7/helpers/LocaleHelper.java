@@ -1,10 +1,8 @@
-package ru.deltadelete.lab5.helpers;
+package ru.deltadelete.lab7.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import ru.deltadelete.lab5.models.Town;
 
 public class LocaleHelper {
     private static List<Locale> locales;

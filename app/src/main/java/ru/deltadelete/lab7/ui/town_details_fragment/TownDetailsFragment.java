@@ -1,4 +1,4 @@
-package ru.deltadelete.lab5.ui.town_details_fragment;
+package ru.deltadelete.lab7.ui.town_details_fragment;
 
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -10,11 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import ru.deltadelete.lab5.MyViewModel;
-import ru.deltadelete.lab5.databinding.FragmentTownDetailsBinding;
-import ru.deltadelete.lab5.models.Town;
+import ru.deltadelete.lab7.MyViewModel;
+import ru.deltadelete.lab7.databinding.FragmentTownDetailsBinding;
+import ru.deltadelete.lab7.models.Town;
 
 public class TownDetailsFragment extends Fragment {
+
+    public TownDetailsFragment() {
+        // Required empty public constructor
+    }
 
     public static final String TOWN_ARG = "TOWN_OBJECT";
     private Town town;
@@ -26,10 +30,6 @@ public class TownDetailsFragment extends Fragment {
         args.putSerializable(TOWN_ARG, town);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public TownDetailsFragment() {
-        // Required empty public constructor
     }
 
     @Override

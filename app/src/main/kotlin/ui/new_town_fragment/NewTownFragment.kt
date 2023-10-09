@@ -1,4 +1,4 @@
-package ru.deltadelete.lab5.ui.new_town_fragment
+package ru.deltadelete.lab7.ui.new_town_fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import ru.deltadelete.lab5.MyViewModel
-import ru.deltadelete.lab5.R
-import ru.deltadelete.lab5.databinding.FragmentNewTownBinding
-import ru.deltadelete.lab5.models.Town
+import ru.deltadelete.lab7.MyViewModel
+import ru.deltadelete.lab7.R
+import ru.deltadelete.lab7.databinding.FragmentNewTownBinding
+import ru.deltadelete.lab7.models.Town
 import java.util.Locale
 import java.util.stream.Collectors
 

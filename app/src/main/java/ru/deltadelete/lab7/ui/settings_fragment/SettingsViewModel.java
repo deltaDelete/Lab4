@@ -1,15 +1,16 @@
-package ru.deltadelete.lab5.ui.settings_fragment;
+package ru.deltadelete.lab7.ui.settings_fragment;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.AndroidViewModel;
 
 import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.Locale;
 
-import ru.deltadelete.lab5.helpers.SharedPreferencesHelper;
+import ru.deltadelete.lab7.helpers.SharedPreferencesHelper;
 
 public class SettingsViewModel extends AndroidViewModel {
     private Locale language;
@@ -75,6 +76,12 @@ public class SettingsViewModel extends AndroidViewModel {
     public void setDarkTheme(boolean darkTheme) {
         this.darkTheme = darkTheme;
         SharedPreferencesHelper.putBool(getApplication().getApplicationContext(), DARK_THEME_KEY, darkTheme);
+        if (darkTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     public int getTownAmount() {

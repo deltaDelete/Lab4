@@ -1,4 +1,4 @@
-package ru.deltadelete.lab5.helpers;
+package ru.deltadelete.lab7.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;

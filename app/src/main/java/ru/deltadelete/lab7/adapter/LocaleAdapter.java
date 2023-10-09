@@ -1,8 +1,6 @@
-package ru.deltadelete.lab5.adapter;
+package ru.deltadelete.lab7.adapter;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +11,10 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.google.android.material.card.MaterialCardView;
-
 import java.util.List;
 import java.util.Locale;
 
-import ru.deltadelete.lab5.R;
-import ru.deltadelete.lab5.models.Town;
+import ru.deltadelete.lab7.R;
 
 public class LocaleAdapter extends ArrayAdapter<Locale> {
 

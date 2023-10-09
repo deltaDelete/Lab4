@@ -1,11 +1,10 @@
-package ru.deltadelete.lab5;
+package ru.deltadelete.lab7;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.app.UiModeManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,9 +15,9 @@ import com.google.android.material.color.DynamicColors;
 
 import java.util.Locale;
 
-import ru.deltadelete.lab5.databinding.ActivityMainBinding;
-import ru.deltadelete.lab5.ui.settings_fragment.SettingsFragment;
-import ru.deltadelete.lab5.ui.settings_fragment.SettingsViewModel;
+import ru.deltadelete.lab7.databinding.ActivityMainBinding;
+import ru.deltadelete.lab7.ui.settings_fragment.SettingsFragment;
+import ru.deltadelete.lab7.ui.settings_fragment.SettingsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Fresco.initialize(this); // Подгрузчик картинок от Facebook
         settingsVm = new ViewModelProvider(this).get(SettingsViewModel.class);
         setLocale();
-        setThemeMode();
+        applyThemeMode();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         var root = binding.getRoot();
@@ -41,9 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbarMain);
     }
 
-    private void setThemeMode() {
+    private void applyThemeMode() {
         boolean darkModeEnabled = settingsVm.isDarkTheme();
-        UiModeManager ui = (UiModeManager) this.getSystemService(UI_MODE_SERVICE);
         if (darkModeEnabled) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
@@ -54,13 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void setLocale() {
         Locale locale = settingsVm.getLanguage();
+        if (locale.getDisplayLanguage().equals("")) {
+            return;
+        }
         Resources res = getResources();
         var conf = res.getConfiguration();
-        var metrics = res.getDisplayMetrics();
         conf.setLocale(locale);
         Locale.setDefault(locale);
         createConfigurationContext(conf);
-        res.updateConfiguration(conf, metrics);
     }
 
     @Override

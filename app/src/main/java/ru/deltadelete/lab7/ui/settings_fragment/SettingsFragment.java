@@ -1,4 +1,4 @@
-package ru.deltadelete.lab5.ui.settings_fragment;
+package ru.deltadelete.lab7.ui.settings_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,17 +14,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
-
 import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
-import ru.deltadelete.lab5.R;
-import ru.deltadelete.lab5.adapter.LocaleAdapter;
-import ru.deltadelete.lab5.databinding.FragmentSettingsBinding;
-import ru.deltadelete.lab5.helpers.SharedPreferencesHelper;
+import ru.deltadelete.lab7.R;
+import ru.deltadelete.lab7.adapter.LocaleAdapter;
+import ru.deltadelete.lab7.databinding.FragmentSettingsBinding;
+import ru.deltadelete.lab7.helpers.SharedPreferencesHelper;
 import timber.log.Timber;
 
 public class SettingsFragment extends Fragment {
@@ -88,8 +87,13 @@ public class SettingsFragment extends Fragment {
                 locales);
         binding.spinnerLanguage.setAdapter(adapter);
         Locale lang = viewModel.getLanguage();
+        var displayLanguages = locales.stream().map(it -> it.getDisplayLanguage()).collect(Collectors.toList());
         String text = lang.getDisplayLanguage();
-        String displayText = text.substring(0, 1).toUpperCase() + text.substring(1);
+        if (!displayLanguages.contains(lang.getDisplayLanguage())) {
+            text = locales.get(0).getDisplayLanguage();
+        }
+        String displayText = text.length() < 2 ? text.toUpperCase() :
+                text.substring(0, 1).toUpperCase() + text.substring(1);
         binding.spinnerLanguage.setText(displayText, false);
     }
 

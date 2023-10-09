@@ -1,15 +1,13 @@
-package ru.deltadelete.lab5.models;
+package ru.deltadelete.lab7.models;
 
 import androidx.annotation.DrawableRes;
 
 import com.github.javafaker.Faker;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
-import ru.deltadelete.lab5.helpers.LocaleHelper;
+import ru.deltadelete.lab7.helpers.LocaleHelper;
 
 public class Town implements Serializable {
     private int id;
