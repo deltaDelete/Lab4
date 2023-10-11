@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.ui.settings_fragment;
+package ru.deltadelete.lab8.ui.settings_fragment;
 
 import android.app.Application;
 
@@ -10,7 +10,7 @@ import org.apache.commons.lang3.LocaleUtils;
 
 import java.util.Locale;
 
-import ru.deltadelete.lab7.helpers.SharedPreferencesHelper;
+import ru.deltadelete.lab8.helpers.SharedPreferencesHelper;
 
 public class SettingsViewModel extends AndroidViewModel {
     private Locale language;

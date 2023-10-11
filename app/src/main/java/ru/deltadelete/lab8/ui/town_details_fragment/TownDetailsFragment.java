@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.ui.town_details_fragment;
+package ru.deltadelete.lab8.ui.town_details_fragment;
 
 import android.os.Bundle;
 import android.transition.TransitionInflater;
@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import ru.deltadelete.lab7.MyViewModel;
-import ru.deltadelete.lab7.databinding.FragmentTownDetailsBinding;
-import ru.deltadelete.lab7.models.Town;
+import ru.deltadelete.lab8.MyViewModel;
+import ru.deltadelete.lab8.databinding.FragmentTownDetailsBinding;
+import ru.deltadelete.lab8.models.Town;
 
 public class TownDetailsFragment extends Fragment {
 

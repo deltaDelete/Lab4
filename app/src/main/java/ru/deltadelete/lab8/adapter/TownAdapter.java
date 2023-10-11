@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.adapter;
+package ru.deltadelete.lab8.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,10 +14,10 @@ import androidx.annotation.Nullable;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.material.card.MaterialCardView;
 
-import ru.deltadelete.lab7.R;
-import ru.deltadelete.lab7.helpers.SharedPreferencesHelper;
-import ru.deltadelete.lab7.models.Town;
-import ru.deltadelete.lab7.ui.settings_fragment.SettingsViewModel;
+import ru.deltadelete.lab8.R;
+import ru.deltadelete.lab8.helpers.SharedPreferencesHelper;
+import ru.deltadelete.lab8.models.Town;
+import ru.deltadelete.lab8.ui.settings_fragment.SettingsViewModel;
 
 import java.util.List;
 

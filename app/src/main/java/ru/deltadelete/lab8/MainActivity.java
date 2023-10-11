@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7;
+package ru.deltadelete.lab8;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,9 +15,9 @@ import com.google.android.material.color.DynamicColors;
 
 import java.util.Locale;
 
-import ru.deltadelete.lab7.databinding.ActivityMainBinding;
-import ru.deltadelete.lab7.ui.settings_fragment.SettingsFragment;
-import ru.deltadelete.lab7.ui.settings_fragment.SettingsViewModel;
+import ru.deltadelete.lab8.databinding.ActivityMainBinding;
+import ru.deltadelete.lab8.ui.settings_fragment.SettingsFragment;
+import ru.deltadelete.lab8.ui.settings_fragment.SettingsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

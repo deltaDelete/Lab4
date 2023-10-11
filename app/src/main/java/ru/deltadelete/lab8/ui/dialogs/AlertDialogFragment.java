@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.ui.dialogs;
+package ru.deltadelete.lab8.ui.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,8 +12,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import ru.deltadelete.lab7.R;
-import ru.deltadelete.lab7.models.Town;
+import ru.deltadelete.lab8.R;
+import ru.deltadelete.lab8.models.Town;
 
 public class AlertDialogFragment extends DialogFragment {
     @DrawableRes

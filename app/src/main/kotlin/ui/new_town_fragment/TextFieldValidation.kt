@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.ui.new_town_fragment
+package ru.deltadelete.lab8.ui.new_town_fragment
 
 import android.content.Context
 import android.text.Editable
@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.EditText
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputLayout
-import ru.deltadelete.lab7.R
+import ru.deltadelete.lab8.R
 
 
 public class TextFieldValidation(val context: Context, private val view: View, private val inputLayout: TextInputLayout) : TextWatcher {

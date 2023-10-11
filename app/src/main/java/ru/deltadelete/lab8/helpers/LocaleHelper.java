@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.helpers;
+package ru.deltadelete.lab8.helpers;
 
 import java.util.ArrayList;
 import java.util.List;

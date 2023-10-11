@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.adapter;
+package ru.deltadelete.lab8.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 import java.util.Locale;
 
-import ru.deltadelete.lab7.R;
+import ru.deltadelete.lab8.R;
 
 public class LocaleAdapter extends ArrayAdapter<Locale> {
 

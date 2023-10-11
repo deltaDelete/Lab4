@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.ui.settings_fragment;
+package ru.deltadelete.lab8.ui.settings_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import ru.deltadelete.lab7.R;
-import ru.deltadelete.lab7.adapter.LocaleAdapter;
-import ru.deltadelete.lab7.databinding.FragmentSettingsBinding;
-import ru.deltadelete.lab7.helpers.SharedPreferencesHelper;
+import ru.deltadelete.lab8.R;
+import ru.deltadelete.lab8.adapter.LocaleAdapter;
+import ru.deltadelete.lab8.databinding.FragmentSettingsBinding;
+import ru.deltadelete.lab8.helpers.SharedPreferencesHelper;
 import timber.log.Timber;
 
 public class SettingsFragment extends Fragment {

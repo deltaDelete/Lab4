@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7;
+package ru.deltadelete.lab8;
 
 import android.app.Application;
 
@@ -8,10 +8,10 @@ import com.github.javafaker.Faker;
 
 import java.util.ArrayList;
 
-import ru.deltadelete.lab7.adapter.TownAdapter;
-import ru.deltadelete.lab7.helpers.LocaleHelper;
-import ru.deltadelete.lab7.helpers.SharedPreferencesHelper;
-import ru.deltadelete.lab7.models.Town;
+import ru.deltadelete.lab8.adapter.TownAdapter;
+import ru.deltadelete.lab8.helpers.LocaleHelper;
+import ru.deltadelete.lab8.helpers.SharedPreferencesHelper;
+import ru.deltadelete.lab8.models.Town;
 
 public class MyViewModel extends AndroidViewModel {
     private TownAdapter adapter;

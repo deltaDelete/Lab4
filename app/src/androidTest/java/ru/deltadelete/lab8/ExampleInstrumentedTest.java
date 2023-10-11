@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7;
+package ru.deltadelete.lab8;
 
 import android.content.Context;
 

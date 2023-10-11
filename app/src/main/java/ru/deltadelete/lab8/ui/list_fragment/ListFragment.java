@@ -1,4 +1,4 @@
-package ru.deltadelete.lab7.ui.list_fragment;
+package ru.deltadelete.lab8.ui.list_fragment;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,14 +17,14 @@ import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
 
-import ru.deltadelete.lab7.MyViewModel;
-import ru.deltadelete.lab7.ui.dialogs.AlertDialogFragment;
-import ru.deltadelete.lab7.ui.new_town_fragment.NewTownFragment;
-import ru.deltadelete.lab7.R;
-import ru.deltadelete.lab7.models.Town;
-import ru.deltadelete.lab7.adapter.TownAdapter;
-import ru.deltadelete.lab7.databinding.FragmentListBinding;
-import ru.deltadelete.lab7.ui.town_details_fragment.TownDetailsFragment;
+import ru.deltadelete.lab8.MyViewModel;
+import ru.deltadelete.lab8.ui.dialogs.AlertDialogFragment;
+import ru.deltadelete.lab8.ui.new_town_fragment.NewTownFragment;
+import ru.deltadelete.lab8.R;
+import ru.deltadelete.lab8.models.Town;
+import ru.deltadelete.lab8.adapter.TownAdapter;
+import ru.deltadelete.lab8.databinding.FragmentListBinding;
+import ru.deltadelete.lab8.ui.town_details_fragment.TownDetailsFragment;
 
 public class ListFragment extends Fragment {
 

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ru.deltadelete.lab7"
+    namespace = "ru.deltadelete.lab8"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "ru.deltadelete.lab7"
+        applicationId = "ru.deltadelete.lab8"
         minSdk = 26
         targetSdk = 33
         versionCode = 1
