@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbarMain);
     }
 
+    //
     private void applyThemeMode() {
         boolean darkModeEnabled = settingsVm.isDarkTheme();
         if (darkModeEnabled) {

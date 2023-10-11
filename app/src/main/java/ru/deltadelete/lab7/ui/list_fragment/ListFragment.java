@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -55,6 +56,24 @@ public class ListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(MyViewModel.class);
         initList();
         initButtonAdd();
+        initFakeLoading();
+    }
+
+    private void initFakeLoading() {
+        FragmentActivity activity = requireActivity();
+        binding.listViewFl.setVisibility(View.INVISIBLE);
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            activity.runOnUiThread(() -> {
+                binding.progressIndicator.setVisibility(View.GONE);
+                binding.listViewFl.setVisibility(View.VISIBLE);
+            });
+        });
+        thread.start();
     }
 
     private void initButtonAdd() {
